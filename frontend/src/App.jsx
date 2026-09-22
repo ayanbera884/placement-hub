@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useContext } from 'react';
-import './app.css';
+import './App.css';
 
 import { AuthProvider, AuthContext } from './context/AuthContext';
 
