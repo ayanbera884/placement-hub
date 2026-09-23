@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.List;
 
@@ -16,19 +16,20 @@ public class CorsConfig {
     private String frontendUrl;
 
     @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
+    public CorsConfigurationSource corsConfigurationSource() {
 
-        corsConfiguration.setAllowCredentials(true);
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        corsConfiguration.setAllowedOrigins(List.of(
+        configuration.setAllowCredentials(true);
+
+        configuration.setAllowedOrigins(List.of(
                 frontendUrl,
                 "http://localhost:5173",
                 "http://localhost:3000"));
 
-        corsConfiguration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedHeaders(List.of("*"));
 
-        corsConfiguration.setAllowedMethods(List.of(
+        configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
                 "PUT",
@@ -36,12 +37,12 @@ public class CorsConfig {
                 "DELETE",
                 "OPTIONS"));
 
-        corsConfiguration.setExposedHeaders(List.of("Authorization"));
+        configuration.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration("/**", corsConfiguration);
+        source.registerCorsConfiguration("/**", configuration);
 
-        return new CorsFilter(source);
+        return source;
     }
 }
