@@ -129,7 +129,25 @@ const AdminCompanies = () => {
                             style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', resize: 'vertical', outline: 'none' }}
                         />
                     </div>
-                    <Button onClick={handleSave} style={{ width: '100%' }}>{saving ? 'Saving...' : 'Save Company'}</Button>
+                    <button
+                        type="button"
+                        onClick={handleSave}
+                        disabled={saving}
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem 1.5rem',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            cursor: saving ? 'not-allowed' : 'pointer',
+                            border: 'none',
+                            background: 'linear-gradient(135deg, var(--accent-primary), #818cf8)',
+                            color: 'white',
+                            fontFamily: 'var(--font-sans)',
+                            opacity: saving ? 0.7 : 1
+                        }}
+                    >
+                        {saving ? 'Saving...' : 'Save Company'}
+                    </button>
                 </Modal>
             )}
         </div>
